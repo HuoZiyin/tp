@@ -14,17 +14,30 @@ try:
         print("成功连接到 MySQL 数据库")
         # 创建一个游标对象
         cursor = connection.cursor()
+        sql = "1"
+        # 执行一个
+        while sql != "quit":
+            sql = input()
+            cursor.execute(sql)
+            # record = cursor.fetchone()
+            # print(f"你连接到的数据库是: {record}")
+            try:
+                rows = cursor.fetchall()
+                for row in rows:
+                    print(row)
+            except Error as e:
+                print("no output")
 
-        # 执行一个查询
-        cursor.execute("SELECT DATABASE();")
-        record = cursor.fetchone()
-        print(f"你连接到的数据库是: {record}")
+            connection.commit()
+            print("s")
+
+
 
 except Error as e:
     print(f"连接数据库时出现错误: {e}")
 
-finally:
-    if connection.is_connected():
-        cursor.close()
-        connection.close()
-        print("MySQL 连接已关闭")
+# finally:
+#     if connection.is_connected():
+#         cursor.close()
+#         connection.close()
+#         print("MySQL 连接已关闭")
